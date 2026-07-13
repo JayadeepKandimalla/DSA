@@ -13,22 +13,21 @@ class Solution {
         if(head==null || head.next==null){
             return null;
         }
-        ListNode slow= head;
-        ListNode fast= head;
-        
+
+        ListNode ptr1= head, ptr2= head;
         for(int i=0;i<n;i++){
-            fast= fast.next;
+            ptr2= ptr2.next;
         }
 
-        if(fast == null) {
-            return head.next;
+        if(ptr2==null) return head.next;    //Handles the case when we want to delete first node.
+
+        while(ptr2!= null && ptr2.next!= null){
+            ptr1= ptr1.next;
+            ptr2= ptr2.next;
         }
-        
-        while(fast!=null && fast.next!=null){
-            slow= slow.next;
-            fast= fast.next;
-        }
-        slow.next= slow.next.next;
+
+
+        ptr1.next= ptr1.next.next;
         return head;
     }
 }

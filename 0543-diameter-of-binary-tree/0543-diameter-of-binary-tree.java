@@ -14,20 +14,18 @@
  * }
  */
 class Solution {
-    int max= 0;
-
+    int globalMax= 0;
     public int diameterOfBinaryTree(TreeNode root) {
         helper(root);
-        return max;
+        return globalMax;
     }
 
-    public int helper(TreeNode node){
-        if(node==null) return 0;
+    public int helper(TreeNode root){
+        if(root== null) return 0;
+        int ls= helper(root.left);
+        int rs= helper(root.right);
 
-        int ls= helper(node.left);
-        int rs= helper(node.right);
-        
-        max= Math.max(max, ls+rs);
-        return Math.max(ls, rs)+1;
+        globalMax= Math.max(globalMax, ls+rs);
+        return Math.max(ls, rs) +1;
     }
 }

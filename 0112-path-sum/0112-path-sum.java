@@ -14,24 +14,11 @@
  * }
  */
 class Solution {
-    boolean flag= false;
-
     public boolean hasPathSum(TreeNode root, int targetSum) {
-        preorder(root, targetSum, 0);
-        return flag;
-    }
+        if(root==null) return false;
 
-    public void preorder(TreeNode curr, int tar, int sum){
-        if(curr==null) 
-            return;
+        if(root.left==null && root.right==null) return root.val==targetSum;
 
-        sum+= curr.val;
-        if(curr.left==null && curr.right==null && sum== tar){
-            flag= true;
-            return;
-        }
-
-        preorder(curr.left, tar, sum);
-        preorder(curr.right, tar, sum);
+        return hasPathSum(root.left, targetSum- root.val) || hasPathSum(root.right, targetSum- root.val);
     }
 }

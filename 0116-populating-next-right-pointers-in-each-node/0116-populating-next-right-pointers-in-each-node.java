@@ -30,15 +30,15 @@ class Solution {
             int n= q.size();
             for(int i= 0;i<n;i++){
                 Node temp= q.poll();
-                if(temp.left!=null) q.add(temp.left);
-                if(temp.right!=null) q.add(temp.right);
                 if(i==n-1){
                     temp.next= null;
                 }
                 else{
                     temp.next= q.peek();
                 }
-
+                
+                if(temp.left!=null) q.add(temp.left);
+                if(temp.right!=null) q.add(temp.right);
             }
         }
         return root;

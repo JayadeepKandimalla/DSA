@@ -14,13 +14,16 @@ class Solution {
 
         ListNode slow= head;
         ListNode fast= head;
+        ListNode prev= null;
 
         while(fast!=null && fast.next!=null){
+            prev= slow;
             slow= slow.next;
             fast= fast.next.next;
         }
 
         ListNode head2= reverse(slow);
+        prev.next=null;
         ListNode l1= head;
         ListNode l2= head2;
 
@@ -38,6 +41,7 @@ class Solution {
     private ListNode reverse(ListNode root){
         ListNode prev= null;
         ListNode curr= root;
+        
         while(curr!=null){
             ListNode next= curr.next;
             curr.next= prev;

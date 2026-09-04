@@ -16,19 +16,26 @@
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> ans= new ArrayList<>();
-        Queue<TreeNode> q= new LinkedList<>();
-        q.add(root);
-        if(root==null) return ans;
-        while(!q.isEmpty()){
-            int n= q.size();
-            for(int i= 0;i<n;i++){
-                TreeNode curr= q.poll();
-                if(i==n-1)  ans.add(curr.val);
-                if(curr.left!=null) q.add(curr.left);
-                if(curr.right!=null) q.add(curr.right);
-            }
+
+        if(root==null){
+            return ans;
         }
 
+        rightView(root, 0, ans);
+
         return ans;
+    }
+
+    public void rightView(TreeNode root, int level, List<Integer> ans){
+        if(root==null){
+            return;
+        }
+
+        if(ans.size()==level){
+            ans.add(root.val);
+        }
+
+        rightView(root.right, level +1, ans);
+        rightView(root.left, level+1, ans);
     }
 }

@@ -16,16 +16,19 @@
 class Solution {
     public TreeNode invertTree(TreeNode root) {
         if(root==null) return null;
+        Queue<TreeNode> q= new LinkedList<>();
+        q.add(root);
 
-        TreeNode temp= root.left;
-        root.left= root.right;
-        root.right= temp;
+        while(!q.isEmpty()){
+            TreeNode temp= q.poll();
+            if(temp.left!=null) q.add(temp.left);
+            if(temp.right!=null) q.add(temp.right);
 
-        invertTree(root.left);
-        invertTree(root.right);
+            TreeNode curr= temp.left;
+            temp.left= temp.right;
+            temp.right= curr;
+        }
 
         return root;
     }
-
-    
 }
